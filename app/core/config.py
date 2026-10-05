@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     S3_ENDPOINT_URL: Optional[str] = None
     S3_ACCESS_KEY: Optional[str] = None
     S3_SECRET_KEY: Optional[str] = None
+    
+    YOUTUBE_COOKIES_BASE64: Optional[str] = None
 
     model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
 
