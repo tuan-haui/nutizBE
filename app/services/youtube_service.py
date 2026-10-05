@@ -4,6 +4,7 @@ from app.schemas.youtube import (
     ExtractMediaResponse, MediaInfo, ChannelInfo
 )
 from app.core.exceptions import AppException
+from typing import Dict, Any
 import logging
 
 logger = logging.getLogger(__name__)
@@ -101,3 +102,9 @@ class YoutubeService:
             )
         except Exception as e:
             self._handle_error(e, url)
+
+    def search(self, query: str, max_results: int = 10) -> Dict[str, Any]:
+        try:
+            return self.ytdlp.search(query, max_results)
+        except Exception as e:
+            self._handle_error(e, query)

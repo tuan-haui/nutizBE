@@ -41,6 +41,16 @@ class YtDlpService:
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             return ydl.extract_info(url, download=False)
+
+    def search(self, query: str, max_results: int = 10) -> Dict[str, Any]:
+        search_query = f"ytsearch{max_results}:{query}"
+        ydl_opts = {
+            'quiet': True,
+            'no_warnings': True,
+            'extract_flat': True,
+        }
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            return ydl.extract_info(search_query, download=False)
             
     def download_audio(self, url: str, format: str = "mp3", quality: str = "192") -> str:
         import uuid
